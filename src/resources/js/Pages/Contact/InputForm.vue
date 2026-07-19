@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-//フォームを関係の処理を便利にするためのuseFormをインポートする
+// フォームの状態管理や送信を行うため、useFormをインポートする
 import { useForm } from '@inertiajs/vue3';
 
 //監視したいフォーム値を定義する
@@ -16,12 +16,18 @@ const form = useForm({
     kiyaku: false,
 });
 
+// 入力フォームのデータを確認画面へ送信する
+const submit = () => {
+    form.post('/confirm');
+};
+
 </script>
 
 <template>
     <h1>お問い合わせフォーム</h1>
 
-    <form>
+    <!--Inertiaを使用してPOST送信するのでブラウザ標準の送信を止める-->
+    <form @submit.prevent="submit">
         <div>
             <label>企業名</label>
             <input type="text" name="company_nm" v-model="form.company_nm">
