@@ -19,4 +19,15 @@ class FormController extends Controller
             'form' => $request->all(),
         ]);
     }
+
+    /**
+     * 確認画面から送信されたデータを受け取り、送信完了画面を表示する
+     */
+    public function complete(Request $request)
+    {
+        // 今はまだデータベースへの保存は行わず、
+        // 送信完了画面を表示する
+        return Inertia::render('Contact/Complete');
+    }
+
 }

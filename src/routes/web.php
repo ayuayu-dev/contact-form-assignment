@@ -13,10 +13,8 @@ Route::get('/', function () {
 //入力画面からPOSTされたデータをFormControllerのconfirmメソッドで処理する
 Route::post('/confirm', [FormController::class, 'confirm']);
 
-Route::get('/complete', function () {
-    //送信完了画面（Vue）を表示する
-    return Inertia::render('Contact/Complete');
-});
+// 確認画面からPOSTされたデータをFormControllerのcompleteメソッドで処理する
+Route::post('/complete', [FormController::class, 'complete']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
