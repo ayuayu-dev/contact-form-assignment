@@ -12,6 +12,33 @@ class FormController extends Controller
      */
     public function confirm(Request $request)
     {
+        //バリデーションの設定
+        $request->validate(
+
+            [
+                'nm_myouzi' => 'required',
+                'nm_mei' => 'required',
+                'mail_address' => 'required|email',
+                'message' => 'required',
+                'kiyaku' => 'accepted',
+            ],
+            [
+                'required' => ':attributeをご入力ください。',
+                'accepted' => ':attributeに同意してください。',
+                'email' => ':attributeには正しいメールアドレスの形式でご入力ください。',
+            ],
+            [
+                'nm_myouzi' => '担当者名（姓）',
+                'nm_mei' => '担当者名（名）',
+                'mail_address' => 'メールアドレス',
+                'message' => 'お問い合わせ内容',
+                'kiyaku' => '利用規約',
+            ],
+        );
+        
+        // バリデーションを実行しエラーが発生した場合は、確認画面へは進まずエラーメッセージを表示する。
+        // エラーがなければ以降の処理を実行する
+
         // 入力画面から送信されたデータを取得し、Confirm.vueへ渡す
         return Inertia::render('Contact/Confirm', [
 

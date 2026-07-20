@@ -36,7 +36,9 @@ const submit = () => {
         <div>
             <label>担当者名</label>
             <input type="text" name="nm_myouzi" v-model="form.nm_myouzi">
+            <p v-if="form.errors.nm_myouzi">{{ form.errors.nm_myouzi }}</p>
             <input type="text" name="nm_mei" v-model="form.nm_mei">
+            <p v-if="form.errors.nm_mei">{{ form.errors.nm_mei }}</p>
         </div>
 
         <div>
@@ -49,15 +51,18 @@ const submit = () => {
         <div>
             <label>メールアドレス</label>
             <input type="email" name="mail_address" v-model="form.mail_address">
+            <p v-if="form.errors.mail_address">{{ form.errors.mail_address }}</p>
         </div>
 
         <div>
             <label>お問い合わせ内容</label>
             <textarea name="message" v-model="form.message"></textarea>
+            <p v-if="form.errors.message">{{ form.errors.message }}</p>
         </div>
 
         <div>
             <input type="checkbox" name="kiyaku" value="chk" v-model="form.kiyaku"><a href="#">利用規約</a>に同意
+            <p v-if="form.errors.kiyaku">{{ form.errors.kiyaku }}</p>
         </div>
 
         <button type="submit">確認画面へ</button>
