@@ -46,26 +46,63 @@ services:
       - php
 
   # ==========================
-  # MySQL
+  # MySQL（データベース）
   # ==========================
   mysql:
     container_name: contact-form-mysql
 
+    # 公式イメージを利用
     image: mysql:8.4
 
+    # ホストPCの3306番ポートとコンテナの3306番ポートを接続
     ports:
       - "3306:3306"
 
+    # .envからMySQLの設定を読み込む
     environment:
+      # 作成するデータベース名
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+
+      # rootユーザーのパスワード
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+      # Laravelから接続する一般ユーザー名
       MYSQL_USER: ${MYSQL_USER}
+
+      # 一般ユーザーのパスワード
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+      # タイムゾーン
       TZ: ${TZ}
 
+    # MySQLのデータを永続化する
+    # コンテナを削除してもデータは残る
     volumes:
       - mysql_data:/var/lib/mysql
 
+  # ==========================
+  # Mailpit（メール送信テスト）
+  # ==========================
+  mailpit:
+    container_name: contact-form-mailpit
+
+    # 公式イメージを利用
+    image: axllent/mailpit:latest
+
+    # Laravelから送信したメールを受け取り、
+    # ブラウザで確認できるようにポートを公開する
+    ports:
+      # SMTPサーバー
+      # Laravelはこのポートへメールを送信する
+      - "1025:1025"
+
+      # Mailpitの管理画面
+      # ブラウザから http://localhost:8025 で確認できる
+      - "8025:8025"
+
+# ==========================
 # Dockerが管理するデータ領域
+# MySQLのデータを永続化するために使用
+# ==========================
 volumes:
   mysql_data:
