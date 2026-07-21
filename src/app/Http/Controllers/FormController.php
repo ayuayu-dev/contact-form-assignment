@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+// 管理者宛メールを作成するクラス
+use App\Mail\ContactAdminMail;
+// 問い合わせ者宛メールを作成するクラス
+use App\Mail\ContactUserMail;
+// メール送信機能を利用するクラス
+use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
@@ -52,7 +58,17 @@ class FormController extends Controller
      */
     public function complete(Request $request)
     {
-        // 今はまだデータベースへの保存は行わず、
+        // フォームから送信された入力内容を取得する
+        $formData = $request->all();
+
+        // 管理者宛にお問い合わせメールを送信する
+        Mail::to('admin@example.com')
+            ->send(new ContactAdminMail($formData));
+
+        // 問い合わせ者宛にメールを送信する
+        Mail::to($formData['mail_address'])
+            ->send(new ContactUserMail($formData));
+
         // 送信完了画面を表示する
         return Inertia::render('Contact/Complete');
     }

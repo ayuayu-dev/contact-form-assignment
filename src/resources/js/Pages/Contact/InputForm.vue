@@ -68,8 +68,6 @@ const submit = () => {
         <button type="submit">確認画面へ</button>
     </form>
 
-<pre>{{ form }}</pre>
-
 </template>
 
 <style scoped>
