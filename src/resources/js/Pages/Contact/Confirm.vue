@@ -38,6 +38,11 @@ const submit = () => {
     form.post('/complete');
 };
 
+// キャンセルボタンが押されたら前の画面へ戻る
+const cancel = () => {
+    window.history.back();
+};
+
 </script>
 
 <template>
@@ -72,7 +77,7 @@ const submit = () => {
         </div>
 
         <div class="button-group">
-            <button class="cancel-button" type="button">キャンセル</button>
+            <button class="cancel-button" type="button" @click="cancel">キャンセル</button>
             <button class="action-button" type="submit">送信</button>
         </div>
     </form>

@@ -4,7 +4,9 @@
 import { useForm } from '@inertiajs/vue3';
 
 //監視したいフォーム値を定義する
-const form = useForm({
+//const form = useForm({
+//フォームキーを指定することで、確認画面から戻った際に入力内容を保持する
+const form = useForm('ContactForm', {
     company_nm: '',
     nm_myouzi: '',
     nm_mei: '',
