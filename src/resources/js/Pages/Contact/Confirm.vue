@@ -41,41 +41,56 @@ const submit = () => {
 </script>
 
 <template>
-    <h1>お問い合わせフォーム（確認画面）</h1>
+    <h1 class="contact-form-title">お問い合わせフォーム</h1>
 
-    <form @submit.prevent="submit">
-        <div>
+    <form class="contact-form" @submit.prevent="submit">
+        <div class="form-group">
             <label>企業名</label>
             <div>{{ form.company_nm }}</div>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>担当者名</label>
             <div>{{ form.nm_myouzi }} {{ form.nm_mei }}</div>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>住所</label>
             <div>{{ form.zip }}</div>
             <div>{{ form.address1 }}</div>
             <div>{{ form.address2 }}</div>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>メールアドレス</label>
             <div>{{ form.mail_address }}</div>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>お問い合わせ内容</label>
-            <div>{{ form.message }}</div>
+            <div class="confirm-value">{{ form.message }}</div>
         </div>
 
-        <button type="button">キャンセル</button>
-        <button type="submit">送信</button>
+        <div class="button-group">
+            <button class="cancel-button" type="button">キャンセル</button>
+            <button class="action-button" type="submit">送信</button>
+        </div>
     </form>
 
 </template>
 
 <style scoped>
+
+/* お問い合わせ内容の本文内に改行が入っている場合は改行して表示する */
+.confirm-value {
+    white-space: pre-wrap;
+}
+
+/* キャンセルと送信ボタンを横並びにする */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+}
 </style>

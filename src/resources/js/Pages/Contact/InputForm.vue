@@ -24,7 +24,7 @@ const submit = () => {
 </script>
 
 <template>
-    <h1>お問い合わせフォーム</h1>
+    <h1 class="contact-form-title">お問い合わせフォーム</h1>
 
     <!--Inertiaを使用してPOST送信するのでブラウザ標準の送信を止める-->
     <form class="contact-form" @submit.prevent="submit">
@@ -71,41 +71,12 @@ const submit = () => {
             <p class="error-message" v-if="form.errors.kiyaku">{{ form.errors.kiyaku }}</p>
         </div>
 
-        <button type="submit">確認画面</button>
+        <button class="action-button" type="submit">確認画面</button>
     </form>
 
 </template>
 
 <style scoped>
-
-/* お問い合わせフォーム全体のレイアウトを設定する */
-.contact-form {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 32px;
-    background: #fff;
-}
-
-/* タイトルを中央に表示する */
-h1 {
-    max-width: 700px;
-    margin: 40px auto 32px;
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* 各入力項目の間隔を設定する */
-.form-group {
-    margin-bottom: 24px;
-}
-
-/* ラベルを入力欄の上に表示し、見やすくする */
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
 
 /* 入力欄とテキストエリアの共通デザインを設定する */
 input[type="text"],
@@ -121,19 +92,6 @@ textarea {
 /* お問い合わせ内容の入力欄の高さを設定する */
 textarea {
     min-height: 180px;
-}
-
-/* 確認画面へボタンのデザインを設定する */
-button {
-    display: block;
-    width: 160px;
-    margin: 40px auto 0;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    background: #5d9df6;
-    color: white;
-    cursor: pointer;
 }
 
 /* 必須項目ラベルのデザインを設定する */
@@ -158,11 +116,6 @@ input.zip-input {
     width: 30%;
 }
 
-/* ボタンにカーソルを乗せたときの背景色を変更する */
-button:hover {
-    background: #2d6cdf;
-}
-
 /* 利用規約のリンクデザインを設定する */
 a {
     color: #5d9df6;
@@ -174,6 +127,11 @@ a {
     color: #dc3545;
     font-size: 14px;
     margin-top: 4px;
+}
+
+/* ボタンを中央に配置する */
+.action-button {
+    margin: 40px auto 0;
 }
 
 </style>

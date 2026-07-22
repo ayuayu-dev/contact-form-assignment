@@ -13,7 +13,7 @@ const backToForm = () => {
 </script>
 
 <template>
-    <h1>お問い合わせフォーム（送信完了）</h1>
+    <h1>お問い合わせフォーム</h1>
 
     <div>
         お問い合わせを受け付けました。<br>

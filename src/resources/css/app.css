@@ -1,3 +1,6 @@
+/*お問い合わせフォームの共通デザインをインポート*/
+@import "./contact-form.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
