@@ -27,48 +27,153 @@ const submit = () => {
     <h1>お問い合わせフォーム</h1>
 
     <!--Inertiaを使用してPOST送信するのでブラウザ標準の送信を止める-->
-    <form @submit.prevent="submit">
-        <div>
+    <form class="contact-form" @submit.prevent="submit">
+        <div class="form-group">
             <label>企業名</label>
             <input type="text" name="company_nm" v-model="form.company_nm">
         </div>
 
-        <div>
-            <label>担当者名</label>
-            <input type="text" name="nm_myouzi" v-model="form.nm_myouzi">
-            <p v-if="form.errors.nm_myouzi">{{ form.errors.nm_myouzi }}</p>
-            <input type="text" name="nm_mei" v-model="form.nm_mei">
-            <p v-if="form.errors.nm_mei">{{ form.errors.nm_mei }}</p>
+        <div class="form-group">
+            <label>担当者名<span class="required">必須</span></label>
+            <div class="name-group">
+                <div>
+                    <input type="text" placeholder="姓" name="nm_myouzi" v-model="form.nm_myouzi">
+                    <p class="error-message" v-if="form.errors.nm_myouzi">{{ form.errors.nm_myouzi }}</p>
+                </div>
+                <div>
+                    <input type="text" placeholder="名" name="nm_mei" v-model="form.nm_mei">
+                    <p class="error-message" v-if="form.errors.nm_mei">{{ form.errors.nm_mei }}</p>
+                </div>
+            </div>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>住所</label>
-            <input type="text" name="zip" placeholder="郵便番号" v-model="form.zip">
+            <input type="text" class="zip-input" name="zip" placeholder="郵便番号" v-model="form.zip">
             <input type="text" name="address1" placeholder="住所1" v-model="form.address1">
             <input type="text" name="address2" placeholder="住所2" v-model="form.address2">
         </div>
 
-        <div>
-            <label>メールアドレス</label>
+        <div class="form-group">
+            <label>メールアドレス<span class="required">必須</span></label>
             <input type="email" name="mail_address" v-model="form.mail_address">
-            <p v-if="form.errors.mail_address">{{ form.errors.mail_address }}</p>
+            <p class="error-message" v-if="form.errors.mail_address">{{ form.errors.mail_address }}</p>
         </div>
 
-        <div>
-            <label>お問い合わせ内容</label>
+        <div class="form-group">
+            <label>お問い合わせ内容<span class="required">必須</span></label>
             <textarea name="message" v-model="form.message"></textarea>
-            <p v-if="form.errors.message">{{ form.errors.message }}</p>
+            <p class="error-message" v-if="form.errors.message">{{ form.errors.message }}</p>
         </div>
 
-        <div>
-            <input type="checkbox" name="kiyaku" value="chk" v-model="form.kiyaku"><a href="#">利用規約</a>に同意
-            <p v-if="form.errors.kiyaku">{{ form.errors.kiyaku }}</p>
+        <div class="form-group">
+            <input type="checkbox" name="kiyaku" value="chk" v-model="form.kiyaku"><a href="#">利用規約</a>に同意<span class="required">必須</span>
+            <p class="error-message" v-if="form.errors.kiyaku">{{ form.errors.kiyaku }}</p>
         </div>
 
-        <button type="submit">確認画面へ</button>
+        <button type="submit">確認画面</button>
     </form>
 
 </template>
 
 <style scoped>
+
+/* お問い合わせフォーム全体のレイアウトを設定する */
+.contact-form {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+}
+
+/* タイトルを中央に表示する */
+h1 {
+    max-width: 700px;
+    margin: 40px auto 32px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 各入力項目の間隔を設定する */
+.form-group {
+    margin-bottom: 24px;
+}
+
+/* ラベルを入力欄の上に表示し、見やすくする */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* 入力欄とテキストエリアの共通デザインを設定する */
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* お問い合わせ内容の入力欄の高さを設定する */
+textarea {
+    min-height: 180px;
+}
+
+/* 確認画面へボタンのデザインを設定する */
+button {
+    display: block;
+    width: 160px;
+    margin: 40px auto 0;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #5d9df6;
+    color: white;
+    cursor: pointer;
+}
+
+/* 必須項目ラベルのデザインを設定する */
+.required {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 6px;
+    background: #dc3545;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+/* 姓・名の入力欄を横並びに表示する */
+.name-group {
+    display: flex;
+    gap: 16px;
+}
+
+/* 郵便番号入力欄の幅を設定する */
+input.zip-input {
+    width: 30%;
+}
+
+/* ボタンにカーソルを乗せたときの背景色を変更する */
+button:hover {
+    background: #2d6cdf;
+}
+
+/* 利用規約のリンクデザインを設定する */
+a {
+    color: #5d9df6;
+    text-decoration: underline;
+}
+
+/* バリデーションエラーメッセージのデザインを設定する */
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
 </style>
